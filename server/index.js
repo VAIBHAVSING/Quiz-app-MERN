@@ -16,7 +16,7 @@ app.use('/user',userRouter)
 app.use((err,req,res,next)=>{
     res.json({msg:"something is wrong in server"})
 })
-const PORT = 3000;
+const PORT = 3000||process.env.PORT;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
