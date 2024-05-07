@@ -1,16 +1,5 @@
 {
-  "name": "quiz-app",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
-}
-{
-  "name": "Quiz-app-MERN",
+    "name": "quiz-app-mern",
   "version": "1.0.0",
   "description": "",
   "main": "./server/index.js",
