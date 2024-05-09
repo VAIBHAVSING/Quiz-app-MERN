@@ -26,7 +26,7 @@ export function Tests() {
     if (islogin) {
       async function fetchapi() {
         try {
-          const response = await axios.get("http://localhost:3000/user/tests",{
+          const response = await axios.get(`${process.env.REACT_APP_APILINK}/user/tests`,{
             headers:{
               Authorization:localStorage.getItem("studenttoken")
             }

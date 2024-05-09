@@ -70,7 +70,7 @@ export function Signup({ title, linklabel,apiurl}) {
                     <Button label={"Sign up"} onClick={async () => {
                         if (handlesubmit()) {
                             
-                            const url = `http://localhost:3000/${apiurl}/signup`;
+                            const url = `${process.env.REACT_APP_APILINK}/${apiurl}/signup`;
                             const response = await axios.post(url, { email, password, firstname, lastname })
                             localStorage.setItem(`${linklabel}token`, "Bearer " + response.data.token)
                             const data = response.data;

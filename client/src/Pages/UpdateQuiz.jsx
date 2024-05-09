@@ -9,7 +9,7 @@ function TestcardButton({isevaluated,testid}){
         return(
             <Button label={"evaluate"} onClick={async()=>{
                 const token=await localStorage.getItem('admintoken')
-                const response=await axios.get(`http://localhost:3000/admin/evaluated/${testid}`,{headers:{Authorization:token}});
+                const response=await axios.get(`${process.env.REACT_APP_APILINK}/admin/evaluated/${testid}`,{headers:{Authorization:token}});
                 window.location.reload();
             }}/>
         )

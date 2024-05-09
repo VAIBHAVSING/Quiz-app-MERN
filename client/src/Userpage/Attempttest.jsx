@@ -136,7 +136,7 @@ export function Attempttest() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/user/attendtest/${TestId}`, {
+                const response = await axios.get(`${process.env.REACT_APP_APILINK}/user/attendtest/${TestId}`, {
                     headers: {
                         Authorization: localStorage.getItem('studenttoken')
                     }
@@ -166,7 +166,7 @@ export function Attempttest() {
             console.error('Authorization token not found in localStorage');
             return;
         }
-        const response = await axios.post('http://localhost:3000/user/updateanswer', { testid: TestId, submitted:true,question }, {
+        const response = await axios.post(`${process.env.REACT_APP_APILINK}/user/updateanswer`, { testid: TestId, submitted:true,question }, {
             headers: {
                 Authorization: `${authorization}` // Include token as Bearer token in Authorization header
             }

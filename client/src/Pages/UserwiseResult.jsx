@@ -44,7 +44,7 @@ export function UserwiseResult() {
         try {
             async function apicall() {
                 const token = localStorage.getItem("admintoken");
-                const response = await axios.post(`http://localhost:3000/admin/userresult`, {
+                const response = await axios.post(`${process.env.REACT_APP_APILINK}/admin/userresult`, {
                     email:testid[1],testid:testid[0]
                 },{
                     headers: {

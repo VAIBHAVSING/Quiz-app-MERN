@@ -42,7 +42,7 @@ export function Result() {
         try {
             async function apicall() {
                 const token = localStorage.getItem("studenttoken");
-                const response = await axios.get(`http://localhost:3000/user/result/${testid}`, {
+                const response = await axios.get(`${process.env.REACT_APP_APILINK}/user/result/${testid}`, {
                     headers: {
                         Authorization: token
                     }
