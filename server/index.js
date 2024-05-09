@@ -16,7 +16,7 @@ app.use('/user',userRouter)
 app.use((err,req,res,next)=>{
     res.json({msg:"something is wrong in server"})
 })._router
-app.get('/',()=>{
+app.get('/',(req,res)=>{
     res.send("<div> hii from vsing</div>")
 })
 const PORT = 3000||process.env.PORT;
