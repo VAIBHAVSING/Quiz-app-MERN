@@ -216,7 +216,7 @@ export function Createquiz() {
                             try {
 
                                 // Make POST request with authorization token as header
-                                const response = await Axios.post("http://localhost:3000/admin/createtest", {
+                                const response = await Axios.post(`${process.env.REACT_APP_APILINK}/admin/createtest`, {
                                     Title: title,
                                     description,
                                     Duration: duration,

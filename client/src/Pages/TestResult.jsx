@@ -9,7 +9,7 @@ function TestAttempteduser({ data, totalMarks, testid }) {
   const navigate=useNavigate();
   const handleDeleteRecord = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/admin/deletetestrecord', {
+      const response = await axios.post(`${import.meta.env.REACT_APP_APILINK}/admin/deletetestrecord`, {
         testid: testid,
           email: data.email
       }, {headers: {
@@ -59,7 +59,7 @@ export const TestResult = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/admin/Testresult/${testId}`);
+        const response = await axios.get(`${process.env.REACT_APP_APILINK}/admin/Testresult/${testId}`);
         setTotalMarks(response.data.totalmarks);
         setChartData(response.data.studentmarks);
       } catch (error) {
