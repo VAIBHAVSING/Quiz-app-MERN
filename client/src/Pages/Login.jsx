@@ -42,7 +42,7 @@ export function Login({ title, linklabel, apiurl }) {
 
     return (
         <div style={{ background: "black", minHeight: "100vh", color: "white" }}>
-            <div>{JSON.stringify(process.env.REACT_APP_APILINK)}aa</div>
+            
             <div className="flex justify-center border-l-2  border-r-2 xl:mx-80 " >
                 <div className="">
                     <Heading title={"Login " + title} />
