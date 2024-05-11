@@ -14,6 +14,7 @@ import { UpdateQuiz } from './Pages/UpdateQuiz'
 import { Result } from './Userpage/Result'
 import { TestResult } from './Pages/TestResult'
 import {UserwiseResult} from './Pages/UserwiseResult'
+import { Switch } from '@mui/material'
 // import {Test} from "./Pages/test"
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
     <RecoilRoot>
       <BrowserRouter>
         <Routes>
+        <Switch>
         <Route path="/" element={<Signup title={"admin"} linklabel={'admin'} apiurl={'admin'}/>}/>
           <Route  path="/admin/signup" element={<Signup title={"admin"} linklabel={'admin'} apiurl={'admin'}/>}/>
           <Route  path="/admin/login" element={<Login title={"admin"} linklabel={'admin'} apiurl={'admin'}/>} />
@@ -36,6 +38,7 @@ function App() {
           <Route path='/student/showresult/:testid' element={<Result />}/>
           <Route path='/admin/TestResult/:testId' element={<TestResult/>}/>
           <Route path='/admin/viewTestResult/:testid' element={<UserwiseResult />}/>
+        </Switch>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
