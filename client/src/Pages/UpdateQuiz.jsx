@@ -56,7 +56,7 @@ export function UpdateQuiz() {
         async function fetchData() {
             try {
                 const authorization = localStorage.getItem("admintoken");
-                const response = await axios.get("http://localhost:3000/admin/mytest", {
+                const response = await axios.get(`${process.env.REACT_APP_APILINK}/admin/mytest`, {
                     headers: { Authorization: authorization }
                 });
                 setTests(response.data.tests); // Assuming the response data has a 'tests' array
