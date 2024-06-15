@@ -9,7 +9,7 @@ function TestAttempteduser({ data, totalMarks, testid }) {
   const navigate=useNavigate();
   const handleDeleteRecord = async () => {
     try {
-      const response = await axios.post(`${import.meta.env.REACT_APP_APILINK}/admin/deletetestrecord`, {
+      const response = await axios.post(`${process.env.REACT_APP_APILINK}/admin/deletetestrecord`, {
         testid: testid,
           email: data.email
       }, {headers: {
@@ -27,7 +27,7 @@ function TestAttempteduser({ data, totalMarks, testid }) {
   };
 
   return (
-    <div className='flex justify-around bg-primary my-2 rounded-xl'>
+    <div className='flex justify-around bg-primary xl:my-2 rounded-xl'>
       <div className='font-bold flex'>
         <div>
           <div>Name: {data.name}</div>
@@ -89,7 +89,7 @@ export const TestResult = () => {
           <Line type="monotone" dataKey="marks" stroke="#65EC36" activeDot={{ r: 8 }} />
         </LineChart>
       </div>
-      <div className='mx-48'>
+      <div className='xl:mx-48'>
         {chartData.map((studentData, index) => (
           <TestAttempteduser key={index} data={studentData} totalMarks={totalMarks} testid={testId} />
         ))}

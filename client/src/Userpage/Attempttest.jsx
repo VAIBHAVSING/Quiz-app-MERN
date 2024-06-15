@@ -18,7 +18,7 @@ function Radioinput({ id, name, value, checked, onChange }) {
                 checked={checked}
                 onChange={onChange}
             />
-            <label htmlFor={id}>{name}</label>
+            <label htmlFor={id}>{value}</label>
         </div>
     );
 }
@@ -60,7 +60,7 @@ function Questionset({ question, id, selectedAnswer }) {
             return updatedanswer;
         });
     };
-    
+    console.log(id)
     return (
         <div className="mt-4 pt-4 bg-primary">
             <div className="text-3xl text-black font-bold">Q{id + 1}: {question.Q}</div>
@@ -68,7 +68,7 @@ function Questionset({ question, id, selectedAnswer }) {
                 <Radioinput
                     key={'A'}
                     id={`${question._id}A`}
-                    name={question.A} // Name is the same for all options
+                    name={id} // Name is the same for all options
                     value={question.A}
 
                     onChange={() => onAnswerChange(id, question._id, 'A')}
@@ -77,7 +77,7 @@ function Questionset({ question, id, selectedAnswer }) {
                 <Radioinput
                     key={'B'}
                     id={`${question._id}B`}
-                    name={question.B} // Name is the same for all options
+                    name={id} // Name is the same for all options
                     value={question.B}
 
                     onChange={() => onAnswerChange(id, question._id, 'B')}
@@ -86,7 +86,7 @@ function Questionset({ question, id, selectedAnswer }) {
                 <Radioinput
                     key={'C'}
                     id={`${question._id}C`}
-                    name={question.C} // Name is the same for all options
+                    name={id} // Name is the same for all options
                     value={question.C}
 
                     onChange={() => onAnswerChange(id, question._id, 'C')}
@@ -95,7 +95,7 @@ function Questionset({ question, id, selectedAnswer }) {
                 <Radioinput
                     key={'D'}
                     id={`${question._id}D`}
-                    name={question.D} // Name is the same for all options
+                    name={id} // Name is the same for all options
                     value={question.D}
 
                     onChange={() => onAnswerChange(id, question._id, 'D')}
@@ -192,6 +192,7 @@ export function Attempttest() {
                             id={id}
 
                         />
+                        
                     ))}
                 <Button onClick={buttononclick} label={"SUBMIT TEST"} />
                 <br /><br />
