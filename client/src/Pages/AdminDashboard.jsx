@@ -33,7 +33,7 @@ export function AdminDashboard() {
             <br />
             <br />
 
-            <div className='grid grid-cols-3 gap-5 ml-20 mr-20'>
+            <div className='grid xl:grid-cols-3 xl:gap-5 xl:ml-20 xl:mr-20'>
                 <HomeCard title={"Create a quiz"} svg={createsvg} onclick={() => {
                     navigate("/admin/createquiz")
                 }} />

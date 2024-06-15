@@ -7,9 +7,11 @@ import axios from "axios";
 import { Button } from "../Component/Button";
 import { useNavigate } from "react-router-dom";
 
+        
 export function Login({ title, linklabel, apiurl }) {
     const [islogin, setlogin] = useState();
     const navigate = useNavigate();
+    
 
     useEffect(() => {
         if (localStorage.getItem(`${linklabel}token`)) {
@@ -53,9 +55,10 @@ export function Login({ title, linklabel, apiurl }) {
                     <Button label={"Log in"} onClick={async () => {
                         if (handlesubmit()) {
                             const url = `${process.env.REACT_APP_APILINK}/${apiurl}/signin`;
-                            try {
-                                const response = await axios.post(url, { email, password });
+                           
+                              try { const response = await axios.post(url, { email, password });
                                 const data = response.data;
+                                // console.log(response.status)
                                 if (data.token) {
                                     localStorage.setItem('name', data.name);
                                     localStorage.setItem(`${linklabel}token`, "Bearer " + response.data.token);
@@ -64,15 +67,14 @@ export function Login({ title, linklabel, apiurl }) {
                                     } else if (linklabel === 'admin') {
                                         navigate(`/${linklabel}/dashboard`);
                                     }
-                                } else if (response.status === 401) {
+                                }}
+                             catch(response){
+                                if (response.response.status === 401) {
                                     alert("Please enter correct username or password");
-                                } else if (response.status === 500) {
+                                } else if (response.response.status === 500) {
                                     alert("Internal server error");
                                 }
-                            } catch (error) {
-                                console.error('Error:', error);
-                            }
-                        }
+                            }}
                     }} />
                     <br />
                     <Bottomwarning title={"Don't have an account?"} label={"Signup here"} link={`/${linklabel}/signup`} />

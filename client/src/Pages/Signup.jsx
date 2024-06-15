@@ -74,7 +74,7 @@ export function Signup({ title, linklabel,apiurl}) {
                             const response = await axios.post(url, { email, password, firstname, lastname })
                             localStorage.setItem(`${linklabel}token`, "Bearer " + response.data.token)
                             const data = response.data;
-                            if (response.status==200) {
+                            if (data.token) {
                                 localStorage.setItem(`${linklabel}token`, "Bearer " + response.data.token)
                                 localStorage.setItem('name',firstname);
                                 if (linklabel === 'student') {
