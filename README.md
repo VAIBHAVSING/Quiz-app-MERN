@@ -21,7 +21,7 @@ The Quiz App is a web application designed to conduct online quizzes or tests. I
 ## Installation
 1. Clone the repository:
    ```
-   git clone https://github.com/vaibhavsing24/Quiz-app-MERN
+   git clone https://github.com/vaibhavsing/Quiz-app-MERN
    ```
 2. Navigate to the project directory:
    ```
