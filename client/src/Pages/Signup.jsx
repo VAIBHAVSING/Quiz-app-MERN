@@ -70,7 +70,7 @@ export function Signup({ title, linklabel,apiurl}) {
                     <Button label={"Sign up"} onClick={async () => {
                         if (handlesubmit()) {
                             
-                            const url = `${process.env.REACT_APP_APILINK}/${apiurl}/signup`;
+                           try{ const url = `${process.env.REACT_APP_APILINK}/${apiurl}/signup`;
                             const response = await axios.post(url, { email, password, firstname, lastname })
                             localStorage.setItem(`${linklabel}token`, "Bearer " + response.data.token)
                             const data = response.data;
@@ -84,15 +84,19 @@ export function Signup({ title, linklabel,apiurl}) {
                                     navigate(`/admin/dashboard`);
                                 }
                             }
-                            else if(response.status==400){
-                                alert("All fields are required");
+                         }catch(response){
+                            if(response.response.status==400){
+                                console.log(response.response.data.error[0])
+                                const error=response.response.data.error[0].message;
+                                alert("All fields are required \n"+error);
                             }
-                            else if(response.status==409){
+                            else if(response.response.status==409){
                                 alert("Username already exists");
                             }
-                            else if(response.status==500){
+                            else if(response.response.status==500){
                                 alert("Internal server error");
                             }
+                         }
                         }
                     }} />
 
