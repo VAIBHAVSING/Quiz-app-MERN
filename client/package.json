@@ -21,6 +21,7 @@
     "primereact": "^10.6.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
     "react-router-dom": "^6.23.0",
     "recharts": "^2.12.6",
     "recoil": "^0.7.7"

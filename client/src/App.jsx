@@ -14,7 +14,7 @@ import { UpdateQuiz } from './Pages/UpdateQuiz'
 import { Result } from './Userpage/Result'
 import { TestResult } from './Pages/TestResult'
 import {UserwiseResult} from './Pages/UserwiseResult'
-
+import Homepage from './Pages/Homepage'
 // import {Test} from "./Pages/test"
 function App() {
 
@@ -24,7 +24,7 @@ function App() {
       <BrowserRouter>
         <Routes>
         
-        <Route path="/" element={<Signup title={"admin"} linklabel={'admin'} apiurl={'admin'}/>}/>
+        <Route path="/" element={<Homepage/>}/>
           <Route  path="/admin/signup" element={<Signup title={"admin"} linklabel={'admin'} apiurl={'admin'}/>}/>
           <Route  path="/admin/login" element={<Login title={"admin"} linklabel={'admin'} apiurl={'admin'}/>} />
           <Route  path="/student/signup" element={<Signup title={"Student"} linklabel={'student'} apiurl={"user"}/>}/>
