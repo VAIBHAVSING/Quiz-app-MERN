@@ -28,9 +28,9 @@ const AdminSchema = new mongoose.Schema({
         maxLength: 20,
         required: true,
     },
-    Testcreated:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Test'
+    Testcreated: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Test'
     }],
 
 });
@@ -60,133 +60,171 @@ const UserSchema = new mongoose.Schema({
         maxLength: 20,
         required: true,
     },
-    Testattempted:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Test'
+    Testattempted: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Test'
     }]
 });
-const ClassSchema=new mongoose.Schema({
-    classname:{
-        type:String,
-        require:true
+const ClassSchema = new mongoose.Schema({
+    classname: {
+        type: String,
+        require: true
     },
-    classteacher:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Admin'
+    classteacher: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Admin'
     },
-    Student:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'User'
+    Student: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     },
-    testid:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Test'
+    testid: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Test'
     }
 })
 
-const questionSchema=new mongoose.Schema({
-    Q:{
-        type:String,
-        require:true
+const questionSchema = new mongoose.Schema({
+    Q: {
+        type: String,
+        require: true
     },
-    ANS:{
-        type:String,
-        require:true
+    ANS: {
+        type: String,
+        require: true
     },
-    A:String,
-    B:String,
-    C:String,
-    D:String,
+    A: String,
+    B: String,
+    C: String,
+    D: String,
 })
 
 const TestSchema = new mongoose.Schema({
     // Schema definition here
-    Title:{
-        type:String,
-        require:true
+    Title: {
+        type: String,
+        require: true
     },
-    description:{
-        type:String,
+    description: {
+        type: String,
     },
-    starttime:{
-        type:String,
-        required:true
+    starttime: {
+        type: String,
+        required: true
     },
-    endtime:{
-        type:String,
-        required:true
+    endtime: {
+        type: String,
+        required: true
     },
-    Duration:{
-        type:Number,
-        required:true,
+    Duration: {
+        type: Number,
+        required: true,
     },
-    obtainmarks:{
-      type:Number  
+    obtainmarks: {
+        type: Number
     },
-    isevaluated:{
-        type:Boolean,
-        default:false
+    isevaluated: {
+        type: Boolean,
+        default: false
     },
-    question:[questionSchema],
-    
+    question: [questionSchema],
+
 });
-const respondquestionSchema=new mongoose.Schema({
-    questionid:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Test',
-        required:true
+const respondquestionSchema = new mongoose.Schema({
+    questionid: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Test',
+        required: true
     },
-    respond:{
-        type:String,
-        required:true
+    respond: {
+        type: String,
+        required: true
     },
-    correctans:{
-        type:String,
-        required:true
+    correctans: {
+        type: String,
+        required: true
     },
-    correct:{
-        type:Boolean
+    correct: {
+        type: Boolean
     }
 })
-const TestattemptSchema=new mongoose.Schema({
-    testid:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Test',
-        required:true
+const TestattemptSchema = new mongoose.Schema({
+    testid: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Test',
+        required: true
     },
-    user:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'User',
-        required:true
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     },
-    time:{
-        type:String,
-        
+    time: {
+        type: String,
+
     },
-    duration:{
-        type:Number,
-       
+    duration: {
+        type: Number,
+
     },
-    submitted:{
-        type:Boolean,
-        default:false
+    submitted: {
+        type: Boolean,
+        default: false
     },
-    marks:{
-        type:Number
+    marks: {
+        type: Number
     },
-    question:[
+    question: [
         respondquestionSchema
     ]
 })
+const otpSchema = new mongoose.Schema({
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    otp: {
+        type: String,
+        required: true,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+        expires: 60 * 5, // The document will be automatically deleted after 5 minutes of its creation time
+    },
+});
+
+const contactform = new mongoose.Schema({
+    name: {
+        type: String,
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    message: {
+        type: String,
+        required: true,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+
+    }})
 const Admin = mongoose.model('Admin', AdminSchema);
 const User = mongoose.model('User', UserSchema);
 const Test = mongoose.model('Test', TestSchema);
-const Class=mongoose.model('Class',ClassSchema);
-const Testattempt=mongoose.model("Testattempt",TestattemptSchema)
+const Class = mongoose.model('Class', ClassSchema);
+const Testattempt = mongoose.model("Testattempt", TestattemptSchema)
+const Otp = mongoose.model("Otp", otpSchema)
+const Form=mongoose.model('Form',contactform);
 module.exports = {
     Admin,
     User,
     Test,
     Class,
-    Testattempt
+    Testattempt,
+    Otp,Form
 }

@@ -40,4 +40,5 @@ const { Admin, Class, Test, Testattempt, User } = require('../db/index');
         question: combinedData
     });
 }
+
  module.exports={resultmain};

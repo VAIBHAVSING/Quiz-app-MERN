@@ -2,18 +2,30 @@ const express = require("express");
 const { adminmiddleware, getusername } = require('../middleware/admin')
 const app = express();
 require('dotenv').config();
-const { Admin, Class, Test, Testattempt, User } = require('../db/index');
-
+const { Admin, Class, Test, Testattempt, User, Otp } = require('../db/index');
+const zod = require('zod')
 const { default: mongoose, Mongoose } = require("mongoose");
 const jwt = require('jsonwebtoken');
 const bcryptjs = require('bcryptjs');
 const { getuserid } = require("../middleware/user");
 const { resultmain } = require('../middleware/common');
-
+const sendOtp = require('../middleware/otp')
 // Admin Routes
 app.post('/signup', async (req, res) => {
+    const zodschema = zod.object({
+        email: zod.string().email(),
+        password: zod.string().min(6, { message: "password must contain 6 letters" }),
+        firstname: zod.string().max(20, { message: "first name must contain at most letter" }),
+        lastname: zod.string().max(20),
+
+    })
     try {
         const { email, password, firstname, lastname } = req.body;
+        const validationResult = zodschema.safeParse(req.body);
+
+        if (!validationResult.success) {
+            return res.status(400).json({ error: validationResult.error.errors });
+        }
 
         // Check if all required fields are provided
         if (!email || !password || !firstname || !lastname) {
@@ -345,7 +357,7 @@ app.post('/userresult', adminmiddleware, async (req, res) => {
         const { email, testid } = req.body;
         const user = await User.findOne({ email });
         const userid = user._id;
-        
+
         resultmain(req, res, userid, testid);
 
     } catch (error) {
@@ -353,6 +365,49 @@ app.post('/userresult', adminmiddleware, async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 
+})
+app.post('/generateotp', async (req, res) => {
+    try {
+        const { email } = req.body;
+        if (!email) {
+            return res.status(400).json({ message: "Bad Request" });
+        }
+        const user = await Admin.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        const response = await sendOtp(email);
+        if (response) {
+            return res.status(200).json({ message: "OTP sent successfully" });
+        } else {
+            console.log(response)
+            return res.status(500).json({ message: "Internal server error" });
+        }
+
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+})
+app.post('/verifyotp', async (req, res) => {
+    try {
+        const { email, otp } = req.body;
+        if (!email || !otp) {
+            return res.status(400).json({ message: "Bad Request" });
+        }
+
+        const response = await Otp.findOne({email, otp});
+        if (response) {
+            return res.status(200).json({ message: "OTP verified successfully" });
+        } else {
+            console.log(response)
+            return res.status(411).json({ message: "Incorrect otp" });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
 })
 
 module.exports = app;
