@@ -4,6 +4,7 @@ const app = express();
 const adminRouter = require("./routes/admin");
 const userRouter = require("./routes/user");
 const cors = require('cors');
+const { Form } = require('./db');
 app.use(cors());
 // const userRouter = require("./routes/user");
 app.use(cors());
@@ -27,6 +28,28 @@ app.use((err, req, res, next) => {
 app.get('/', (req, res) => {
     res.send("<div> hii from vsing</div>")
 })
+app.post('/contactus', async (req, res) => {
+    try {
+        const { name, email, message } = req.body;
+        const resp = await Form.create({ email, message, name });
+
+        if (resp) {
+            res.json({ msg: "Message sent successfully" });
+        } else {
+            res.status(400).json({ msg: "Message not sent" });
+        }
+    } catch (error) {
+        console.log(error);
+
+        // Check for duplicate key error
+        if (error.code === 11000) {
+            res.json({ msg: "Duplicate entry. Email already exists." });
+        } else {
+            res.status(500).json({ message: "Internal Server Error" });
+        }
+    }
+});
+
 const PORT = 3000 || process.env.PORT;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
