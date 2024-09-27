@@ -17,7 +17,6 @@ app.post('/signup', async (req, res) => {
         password: zod.string().min(6, { message: "password must contain 6 letters" }),
         firstname: zod.string().max(20, { message: "first name must contain at most letter" }),
         lastname: zod.string().max(20),
-
     })
     try {
         const { email, password, firstname, lastname } = req.body;
@@ -69,10 +68,9 @@ app.post('/signin', async (req, res) => {
             res.json({ token: token, name: response.firstname });
         }
         else {
-            res.json({
-                status: false,
-                msg: "please enter correct username or password",
-
+            res.status(401).json({
+                resp: false,
+                msg: "Please enter correct username or password"
             });
         }
     }

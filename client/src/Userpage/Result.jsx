@@ -7,7 +7,7 @@ const TestDetailsComponent = ({ test }) => {
     const min=parseInt(test.duration/60);
     const sec=test.duration%60;
     return (
-      <div className=" text-black font-bold mx-48 p-6 border-b-2 bg-[#D1F3DF]">
+      <div className=" text-black font-bold xl:mx-48 p-6 border-b-2 bg-[#D1F3DF]">
         <h2 className="text-3xl">Title:{test.title}</h2>
         <p>description:{test.description}</p>
         <p>TimeAttempted: {test.time}</p>
