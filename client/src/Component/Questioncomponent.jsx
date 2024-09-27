@@ -19,7 +19,7 @@ export const QuestionComponent = ({ question,index}) => {
     };
 
     return (
-        <div className="mx-48 mb-2 bg-[#D1F3DF]">
+        <div className="xl:mx-48 mb-2 bg-[#D1F3DF]">
             <h3 className="pl-6">Q {index+1}) {question.question}</h3>
             <ul>
                 {Object.entries(question.options).map(([key, value]) => (
